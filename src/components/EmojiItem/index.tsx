@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { I18nManager, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { moderateScale, verticalScale } from '../../theme';
 import { isValidUrl } from '../../utils';
 import EmojiImage from '../EmojiImage';
@@ -76,7 +76,7 @@ const EmojiItem = (props: EmojiItemProps) => {
         { scale: scaled ? 1.0 : 0 },
         { perspective: 1000 },
       ],
-      left: titlePosition,
+      ...(I18nManager.isRTL ? { right: titlePosition } : { left: titlePosition }),
       opacity: scaled ? 1.0 : 0,
       top: showTopEmojiCard ? verticalScale(-30) : verticalScale(70),
     },
