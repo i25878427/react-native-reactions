@@ -86,7 +86,10 @@ const useEmojiView = (props: EmojiModalProps) => {
   ).current;
 
   const onGesture = async (event: GestureResponderEvent) => {
-    if (event.nativeEvent?.pageX >= 16 && event.nativeEvent?.pageX <= 367) {
+    if (
+      event.nativeEvent?.pageX >= 16 &&
+      event.nativeEvent?.pageX <= width - 8
+    ) {
       const currentItem = Math.floor(event.nativeEvent?.pageX);
       if (currentItem) {
         setCurrentEmoji(currentItem);

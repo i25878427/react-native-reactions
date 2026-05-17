@@ -19,10 +19,11 @@ const useEmojiItem = (props: EmojiItemProps) => {
   } = props;
 
   const [xValue, setXValue] = useState<number>(0);
+  const [containerWidth, setContainerWidth] = useState<number>(20);
   const [titlePosition, setTitlePosition] = useState<number>(0);
   //boolean flag to identify whether the emoji is pressed or not
   const scaled: boolean =
-    currentPosition > xValue && currentPosition < xValue + 20;
+    currentPosition > xValue && currentPosition < xValue + containerWidth;
   const scaleEmoji = useSharedValue(0);
   const waveAnim = useSharedValue(0);
 
@@ -40,9 +41,12 @@ const useEmojiItem = (props: EmojiItemProps) => {
   const onLayout = (e: LayoutChangeEvent) => {
     setTimeout(() => {
       childRef?.current &&
-        childRef?.current.measureInWindow((x: number) => {
-          setXValue(x);
-        });
+        childRef?.current.measureInWindow(
+          (x: number, _y: number, width: number) => {
+            setXValue(x);
+            if (width > 0) setContainerWidth(width);
+          }
+        );
     }, 200);
     setTitlePosition(e.nativeEvent.layout.x - 4);
   };
