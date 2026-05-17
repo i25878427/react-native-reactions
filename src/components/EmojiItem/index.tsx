@@ -74,9 +74,9 @@ const EmojiItem = (props: EmojiItemProps) => {
     {
       transform: [
         { scale: scaled ? 1.0 : 0 },
-        { translateX: titlePosition },
         { perspective: 1000 },
       ],
+      left: titlePosition,
       opacity: scaled ? 1.0 : 0,
       top: showTopEmojiCard ? verticalScale(-30) : verticalScale(70),
     },
